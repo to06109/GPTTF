@@ -20,7 +20,7 @@ async function testAPI() {
         { role: 'system', content: '' },
         {
           role: 'user',
-          content: '연결을 성공했다면 TF 멤버들에게 짧은 인사말을 해주세요.',
+          content: '연결을 성공했다면 안녕!',
         },
       ],
       max_tokens: 1000,
