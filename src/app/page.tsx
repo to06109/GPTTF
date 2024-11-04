@@ -77,19 +77,65 @@ export default function Home() {
                 placeholder='답을 입력하세요'
               />
 
-              <button
-                onClick={handleSubmit}
-                className='bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600'
-              >
-                제출
-              </button>
+              <div className='flex gap-4'>
+                <button
+                  onClick={handleSubmit}
+                  className='bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600'
+                >
+                  제출
+                </button>
 
-              <button
-                onClick={() => setShowExplanation(!showExplanation)}
-                className='ml-4 bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600'
-              >
-                해설 보기
-              </button>
+                <button
+                  onClick={() => setShowExplanation(!showExplanation)}
+                  className='bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600'
+                >
+                  해설 보기
+                </button>
+              </div>
+
+              {/* 문제 이동 버튼 추가 */}
+              <div className='flex justify-between mt-4'>
+                <button
+                  onClick={() => {
+                    setCurrentProblem((prev) => prev - 1);
+                    setResult(null);
+                    setShowExplanation(false);
+                    setUserAnswer('');
+                  }}
+                  disabled={currentProblem === 0}
+                  className={`px-4 py-2 rounded ${
+                    currentProblem === 0
+                      ? 'bg-gray-300 cursor-not-allowed'
+                      : 'bg-blue-500 text-white hover:bg-blue-600'
+                  }`}
+                >
+                  이전 문제
+                </button>
+
+                <button
+                  onClick={() => {
+                    setCurrentProblem((prev) => prev + 1);
+                    setResult(null);
+                    setShowExplanation(false);
+                    setUserAnswer('');
+                  }}
+                  disabled={!problems || currentProblem === problems.length - 1}
+                  className={`px-4 py-2 rounded ${
+                    !problems || currentProblem === problems.length - 1
+                      ? 'bg-gray-300 cursor-not-allowed'
+                      : 'bg-blue-500 text-white hover:bg-blue-600'
+                  }`}
+                >
+                  다음 문제
+                </button>
+              </div>
+
+              {/* 문제 번호 표시 추가 */}
+              {problems && (
+                <div className='text-center text-gray-600 mt-2'>
+                  {currentProblem + 1} / {problems.length}
+                </div>
+              )}
             </div>
 
             {/* 결과 표시 */}
